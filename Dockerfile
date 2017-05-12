@@ -1,25 +1,13 @@
-FROM centos:7 
+FROM ubuntu:14.04
 
-RUN yum install -y https://repos.fedorapeople.org/repos/openstack/openstack-newton/rdo-release-newton-4.noarch.rpm
+RUN apt-get update && apt-get install -y \
+    git \
+    vim && \
+    apt-get clean
 
-RUN yum update -y
+RUN git clone -b stable/0.9 https://github.com/openstack/rally.git
 
-RUN yum -y install \
-        openstack-rally \
-        gcc \
-        libffi-devel \
-        python-devel \
-        openssl-devel \
-        gmp-devel \
-        libxml2-devel \
-        libxslt-devel \
-        postgresql-devel \
-        redhat-rpm-config \
-        wget \
-        openstack-selinux \
-        openstack-utils && \ 
-        yum clean all
+ADD admin-openrc.sh /rally/admin-openrc.sh
 
-ADD deploy.json /deploy.json
+RUN /rally/install_rally.sh -s -y
 
-RUN rally-manage --config-file /etc/rally/rally.conf db recreate
