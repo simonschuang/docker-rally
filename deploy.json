@@ -1,0 +1,10 @@
+{
+    "type": "ExistingCloud",
+    "auth_url": "http://identity.openstack.cluster:30080/v3",
+    "region_name": "RegionOne",
+    "admin": {
+        "username": "admin",
+        "password": "password",
+        "tenant_name": "admin"
+    }
+}
