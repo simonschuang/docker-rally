@@ -11,3 +11,4 @@ ADD admin-openrc.sh /rally/admin-openrc.sh
 
 RUN /rally/install_rally.sh -s -y
 
+WORKDIR /rally
